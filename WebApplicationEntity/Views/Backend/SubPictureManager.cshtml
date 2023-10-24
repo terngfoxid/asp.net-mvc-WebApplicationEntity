@@ -1,0 +1,72 @@
+﻿@model WebApplicationEntity.Models.Banner
+@{
+    ViewData["Title"] = "Sub Picture Manager";
+}
+<h1 class="mb-2 text-center">@ViewData["Title"]</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+                    
+                    <div class="d-flex justify-content-between">
+                        <h4>Sub Picture of Banner ID: @TempData["PictureManagerID"]</h4>
+                    </div>
+
+            @using (Html.BeginForm("SubPictureCreate", "Backend",new { id = Model.ID}, FormMethod.Post ,false, new { enctype = "multipart/form-data" }))
+            {
+                <div class="form-group">
+                    <label class="control-label">Upload Image</label>
+                    <input class="form-control mt-2" type="file" name="image" />
+                </div>
+                
+                <div class="form-group mt-2">
+                    <input class="py-2 px-3 btn btn-dark" type="submit" value="Add Sub Picture" />
+                </div>
+
+            }
+
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="">
+                            Sub Picture
+                        </th>
+                        <th class=""></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                        @foreach (var item in Model.SubPictures)
+                        {
+                            <tr>
+                                <td>
+                                    <img src="@item.Path" height="100" alt="Sub Picture" asp-append-version="true" />
+                                </td>
+                                <td>
+                                <a asp-action="SubPictureDelete" asp-route-id="@item.ID" asp-route-nextId="@TempData["PictureManagerID"]"><i class="bi-trash-fill text-danger"></i></a>
+                                </td>
+                            </tr>
+                        }
+
+                </tbody>
+            </table>
+
+                    <div class="d-flex justify-content-center mt-4">
+                        <a class="btn btn-secondary" asp-area="" asp-controller="Backend" asp-action="PictureManager" asp-route-id="@TempData["PictureManagerID"]">Back to This Banner</a>
+                    </div>
+
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+</div>
+
+@{
+    if (TempData["SubPictureMSG"] != null)
+    {
+            <script>
+            alert('@TempData["SubPictureMSG"]')
+            </script>
+    }
+}

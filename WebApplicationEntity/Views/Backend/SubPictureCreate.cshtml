@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Sub Picture Create";
+}
+<h1 class="mb-2 text-center">@ViewData["Title"]</h1>
+
+
+
+@{
+    if (TempData["SubPictureMSG"] != null)
+    {
+        <script>
+            alert('@TempData["SubPictureMSG"]')
+            window.location = "/backend/subpicturemanager/" + @TempData["nextroute"]
+        </script>
+    }
+}

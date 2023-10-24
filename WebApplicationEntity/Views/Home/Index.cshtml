@@ -1,0 +1,129 @@
+﻿@model WebApplicationEntity.Models.HomePageData
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container p-sm-1 p-md-2">
+    <div class="row g-2 g-md-3">
+        <div class="col-sm-1 col-md-2"></div>
+        <div class="col-sm-10 col-md-8 overflow-hidden p-0 rounded-3 shadow-lg">
+            @{
+                //Slide show
+            }
+            <div class="ratio ratio-16x9 p-0">
+                <div id="carouselExampleCaptions" class="carousel slide p-0 m-0" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        @if (Model.banners != null && Model.banners.Length != 0)
+                        {
+                            for (int i = 0; i < Model.banners.Length; i++)
+                            {
+                                if (i == 0)
+                                {
+                                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="@i" class="active" aria-current="true"></button>
+                                }
+                                else
+                                {
+                                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="@i"></button>
+                                }
+                            }
+                        }
+                    </div>
+                    <div class="carousel-inner">
+                        @if (Model.banners != null && Model.banners.Length != 0)
+                        {
+                            for (int i = 0; i < Model.banners.Length; i++)
+                            {
+                                if (i == 0)
+                                {
+                                    <div class="carousel-item active">
+                                        <a class="" asp-area="" asp-controller="Home" asp-action="Picture" asp-route-id="@Model.banners[i].ID">
+                                            <img src="@Model.banners[i].Path" class="img-fluid d-block" alt="...">
+                                        </a>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="carousel-item">
+                                        <a class="" asp-area="" asp-controller="Home" asp-action="Picture" asp-route-id="@Model.banners[i].ID">
+                                            <img src="@Model.banners[i].Path" class="img-fluid d-block" alt="...">
+                                        </a>
+                                    </div>
+                                }
+                            }
+                        }
+
+                    </div>
+                    <button class="carousel-control-prev bg-dark bg-opacity-25" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next bg-dark bg-opacity-25" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+            @{
+                //end slide
+            }
+        </div>
+        <div class="col-sm-1 col-md-2"></div>
+
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+            <h2>Random Picture</h2>
+            <div class="w-100 row g-1 mb-2">
+                @if (Model.subpicture != null && Model.subpicture.Length != 0)
+                {
+                    @foreach (var item in Model.subpicture)
+                    {
+                        <a class="col-6 col-sm-4" asp-area="" asp-controller="Home" asp-action="Picture" asp-route-id="@item.BannerID">
+                            <div class="ratio ratio-4x3 p-0">
+                                <img src="@item.Path" class="rounded w-100" alt="...">
+                            </div>
+                        </a>
+                    }
+                }
+            </div>
+            <div class="d-flex justify-content-end">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Picture">See all picture..</a>
+            </div>
+        </div>
+        <div class="col-sm-1"></div>
+
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+            <h2>Article</h2>
+            <div class="p-2 mb-2 row g-2">
+
+                @if (Model.articles != null && Model.articles.Length != 0)
+                {
+                    @foreach (var item in Model.articles)
+                    {
+                        <a class="w-100 rounded-3 shadow-sm overflow-hidden p-0 mb-2 text-decoration-none text-dark" asp-area="" asp-controller="Home" asp-action="Article" asp-route-id="@item.ID">
+                            <div class="w-100 p-2 bg-secondary bg-gradient bg-opacity-25">
+                                <h4 class="px-2">@Html.DisplayFor(modelItem => item.Subject)</h4>
+                                <p class="text-secondary px-3">@Html.DisplayFor(modelItem => item.Time)</p>
+                                <p class="px-3 text-truncate">@Html.DisplayFor(modelItem => item.Body)</p>
+                            </div>
+                        </a>
+                    }
+                }
+
+            </div>
+            <div class="d-flex justify-content-end">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Article">See all Article..</a>
+            </div>
+        </div>
+        <div class="col-sm-1"></div>
+
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+            <h2>Embedded Video Example</h2>
+            <div class="ratio ratio-16x9 ">
+                <iframe class="w-100" src="https://www.youtube.com/embed/zEEN86GDKU8?si=5XQtxWj3LudoJ79j" title="YouTube video player" frameborder="0"></iframe>
+            </div>
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+</div>

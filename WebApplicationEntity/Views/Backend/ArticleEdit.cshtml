@@ -1,0 +1,64 @@
+﻿@model WebApplicationEntity.Models.Article
+@{
+    ViewData["Title"] = "Article Editor";
+}
+<h1 class="mb-2 text-center">@ViewData["Title"]</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+            
+            <div class="row">
+                <h4>Edit Article ID: @TempData["ArticleManagerID"]</h4>
+                <form class="" asp-action="ArticleEdit">
+                    <div class="form-group">
+                        <label class="control-label">Article Subject</label>
+                        <span asp-validation-for="Subject" class="text-danger"></span>
+                        <input class="form-control" asp-for="Subject" type="text" value="@Model.Subject" />
+                        
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Article Body</label>
+                        <span asp-validation-for="Body" class="text-danger"></span>
+                        <textarea class="form-control" rows="7" asp-for="Body" type="text" value="@Html.DisplayFor(model => model.Body)">
+                        </textarea>
+                    </div>
+                    <div class="form-group mt-2 d-flex justify-content-center">
+                        <input class="py-2 px-3 btn btn-dark" type="submit" value="Save edit article" />
+                    </div>
+                </form>
+
+            </div>
+
+            <div class="d-flex justify-content-center mt-4">
+                <a class="btn btn-secondary" asp-area="" asp-controller="Backend" asp-action="ArticleManager">Back to All Article Manager</a>
+                <a class="btn btn-secondary mx-4" asp-area="" asp-controller="Backend" asp-action="ArticleManager" asp-route-id="@Model.ID">Back to this Article View</a>
+            </div>
+
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+</div>
+
+@{
+    if (TempData["ArticleUpdate"] != null)
+    {
+        if (TempData["ArticleUpdate"].Equals("Article update success"))
+        {
+            <script>
+                alert('@TempData["ArticleUpdate"]')
+                window.location = "/backend/articlemanager/@TempData["ArticleManagerID"]"
+            </script>
+        }
+        else
+        {
+            <script>
+                alert('@TempData["ArticleUpdate"]')
+                window.location = "/backend/articleedit/@TempData["ArticleManagerID"]"
+            </script>
+        }
+
+
+    }
+}

@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Backend";
+}
+<h1 class="mb-2 text-center">@ViewData["Title"]</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+
+            <div class="row">
+            <a class="w-100 rounded-3 shadow-sm overflow-hidden p-0 mb-2 text-decoration-none text-dark" asp-area="" asp-controller="Backend" asp-action="PictureManager">
+                <div class="w-100 p-2 bg-primary bg-gradient bg-opacity-25">
+                    <h4>Manage Pictures</h4>
+                </div>
+            </a>
+
+            <a class="w-100 rounded-3 shadow-sm overflow-hidden p-0 mb-2 text-decoration-none text-dark" asp-area="" asp-controller="Backend" asp-action="ArticleManager">
+                <div class="w-100 p-2 bg-info bg-gradient bg-opacity-25">
+                    <h4>Manage Articles</h4>
+                </div>
+            </a>
+            </div>
+
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+</div>
